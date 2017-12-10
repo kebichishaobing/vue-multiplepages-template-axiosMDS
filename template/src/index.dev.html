@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="robots" content="noindex">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link rel="shortcut icon" href="/sites/all/themes/morningstar/favicon.ico" type="image/vnd.microsoft.icon" />
+    <title>Morningstar Demo</title>
+    <link rel="stylesheet" href="/static/mds/mds_library.css">
+    <script type="text/javascript" src="/static/svg4everybody/svg4everybody.min.js"></script>
+    <!-- vanillatree just for reference, start-->
+    <link rel="stylesheet" href="/static/vanillatree/vanillatree.css">
+    <script type="text/javascript" src="/static/vanillatree/vanillatree.js"></script>
+    <!-- vanillatree just for reference, end-->
+</head>
+
+<body>
+    <div class="pageViews"></div>
+    <script>
+        /*vanillatree just for reference, start */ 
+        var main = document.querySelector('.pageViews'),
+            tree = new VanillaTree(main, {
+                contextmenu: [{
+                    label: 'Menu 1',
+                    action: function(id) {
+                        alert('Menu 1 ' + id);
+                    }
+                }, {
+                    label: 'Menu 2',
+                    action: function(id) {
+                        alert('Menu 2 ' + id);
+                    }
+                }]
+            });
+        tree.add({
+            label: 'pages',
+            id: 'pages',
+            opened: true
+        });
+        tree.add({
+            label: 'index.html',
+            id: '/index.html',
+            parent: 'pages',
+            opened: true
+        });
+        tree.add({
+            label: 'chat',
+            id: 'chat',
+            parent: 'pages',
+            opened: true
+        });
+        tree.add({
+            label: 'index1.html',
+            id: '/chat/index.html',
+            parent: 'chat',
+            opened: true
+        });
+        tree.add({
+            label: 'index2.html',
+            id: '/chat/index2.html',
+            parent: 'chat',
+            opened: true
+        });
+        tree.add({
+            label: 'goodbye',
+            id: 'goodbye',
+            parent: 'pages',
+            opened: true
+        });
+        tree.add({
+            label: 'subfolder',
+            id: 'subfolder',
+            parent: 'goodbye',
+            opened: true
+        });
+        tree.add({
+            label: 'index.html',
+            id: '/goodbye/subfolder/index.html',
+            parent: 'subfolder',
+            opened: true
+        });
+        main.addEventListener('vtree-select', function(evt) {
+            console.log(evt.detail.id + ' is selected');
+            if(/^\//.test(evt.detail.id)) {
+                window.location.href= evt.detail.id
+            }
+        });
+        /*vanillatree just for reference, end */ 
+    </script>
+    <div id="app"></div>
+    <script>
+        svg4everybody();
+    </script>
+    <!-- built files will be auto injected -->
+</body>
+
+</html>
